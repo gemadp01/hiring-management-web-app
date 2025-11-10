@@ -4,9 +4,9 @@ import type React from "react";
 
 type TButtonProps = {
   style?: React.CSSProperties;
-  variant: "primary" | "secondary" | "neutral" | "muted";
-  size: "sm" | "md" | "lg";
-  width: "auto" | "full" | "fit";
+  variant?: "primary" | "secondary" | "neutral" | "muted";
+  size?: "sm" | "md" | "lg";
+  width?: "auto" | "full" | "fit";
   className?: string;
   icon?: React.ElementType;
   iconPosition?: "left" | "right";
@@ -14,7 +14,7 @@ type TButtonProps = {
 } & React.ComponentPropsWithoutRef<"button">;
 
 const button = cva(
-  "rounded-[8px] font-bold shadow-[0_1px_2px_0_rgba(0,0,0,0.12)]",
+  "flex items-center justify-center rounded-[8px] font-bold shadow-[0_1px_2px_0_rgba(0,0,0,0.12)]",
   {
     variants: {
       variant: {
@@ -25,9 +25,9 @@ const button = cva(
           "bg-neutral-30 text-neutral-60 border border-neutral-40 cursor-not-allowed",
       },
       size: {
-        sm: "px-4 py-1 text-s",
-        md: "px-4 py-1 text-m",
-        lg: "px-4 py-[6px] text-l",
+        sm: "px-4 py-1 text-s-bold",
+        md: "px-4 py-1 text-m-bold",
+        lg: "px-4 py-[6px] text-l-bold",
       },
       width: {
         auto: "w-auto",

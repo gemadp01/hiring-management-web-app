@@ -58,39 +58,88 @@
 }
 
 @layer utilities {
-  .text-xs {
+  .text-xs-regular {
     font-size: 10px;
     line-height: 16px;
+    font-weight: 400;
   }
 
-  .text-s {
+  .text-xs-bold {
+    font-size: 10px;
+    line-height: 16px;
+    font-weight: 700;
+  }
+
+  .text-s-regular {
     font-size: 12px;
     line-height: 20px;
+    font-weight: 400;
   }
 
-  .text-m {
+  .text-s-bold {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 700;
+  }
+
+  .text-m-regular {
     font-size: 14px;
     line-height: 24px;
+    font-weight: 400;
   }
 
-  .text-l {
+  .text-m-bold {
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+
+  .text-l-regular {
     font-size: 16px;
     line-height: 28px;
+    font-weight: 400;
   }
 
-  .text-heading-s {
+  .text-l-bold {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 700;
+  }
+
+  .text-heading-s-regular {
     font-size: 20px;
     line-height: 32px;
+    font-weight: 400;
   }
 
-  .text-heading-m {
+  .text-heading-s-bold {
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 700;
+  }
+
+  .text-heading-m-regular {
     font-size: 24px;
     line-height: 36px;
+    font-weight: 400;
   }
 
-  .text-heading-l {
+  .text-heading-m-bold {
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 700;
+  }
+
+  .text-heading-l-regular {
     font-size: 32px;
     line-height: 44px;
+    font-weight: 400;
+  }
+
+  .text-heading-l-bold {
+    font-size: 32px;
+    line-height: 44px;
+    font-weight: 700;
   }
 
   .text-display {
@@ -114,13 +163,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+/* body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
+} */
 
 /* @media (prefers-color-scheme: light) {
   :root {
