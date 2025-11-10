@@ -40,7 +40,7 @@ function AuthPageLayout({
             {headDesc}{" "}
             <Link
               to={
-                location.pathname.startsWith("/login") ? "/login" : "/register"
+                location.pathname.startsWith("/login") ? "/register" : "/login"
               }
               className="text-primary-main"
             >
