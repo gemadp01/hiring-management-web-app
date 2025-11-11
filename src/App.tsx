@@ -1,3 +1,4 @@
+import JobListPage from "@/pages/admin/JobListPage";
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import { Navigate, Route, Routes } from "react-router";
@@ -9,6 +10,10 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+
+        <Route path="/admin">
+          <Route path="dashboard" element={<JobListPage />} />
+        </Route>
       </Routes>
     </>
   );

@@ -11,6 +11,7 @@ type TButtonProps = {
   icon?: React.ElementType;
   iconPosition?: "left" | "right";
   children: React.ReactNode;
+  onClick?: () => void;
 } & React.ComponentPropsWithoutRef<"button">;
 
 const button = cva(
@@ -52,9 +53,11 @@ export const Button = ({
   icon: Icon,
   iconPosition = "left",
   children,
+  onClick,
 }: TButtonProps) => {
   return (
     <button
+      onClick={onClick}
       style={style}
       className={clsx(button({ variant, size, width }), className)}
     >

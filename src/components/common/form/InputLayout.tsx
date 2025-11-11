@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 type TInputLayout = {
-  label: string;
+  label?: string;
   inputRequired?: boolean;
   type: string;
   placeholder?: string;
@@ -13,11 +13,11 @@ type TInputLayout = {
 } & React.ComponentPropsWithoutRef<"input">;
 
 const InputLayout = ({
-  label = "label",
+  label,
   inputRequired = false,
   type = "text",
   placeholder,
-  // inputIconSupport,
+  inputIconSupport,
   helperMessage,
   // helperIconSupport,
   errorMessage,
@@ -39,9 +39,11 @@ const InputLayout = ({
           // } ${disabled ? "bg-neutral-30" : ""}`}
           className="relative flex items-center mb-2 border-2 border-neutral-40 rounded-lg bg-neutral-10"
         >
-          {/* <div className="flex items-center justify-center pl-4 pr-2 py-3">
-          {inputIconSupport}
-        </div> */}
+          {inputIconSupport && (
+            <div className="flex items-center justify-center pl-4 py-3 font-bold">
+              {inputIconSupport}
+            </div>
+          )}
 
           <input
             type={type}
@@ -51,7 +53,9 @@ const InputLayout = ({
             // className={`w-full py-2 bg-transparent focus:outline-none placeholder-neutral-60 ${
             //   disabled && "cursor-not-allowed"
             // }`}
-            className="w-full py-2 px-4 bg-transparent focus:outline-none placeholder-neutral-60"
+            className={`w-full py-2 ${
+              inputIconSupport ? "px-2" : "px-4"
+            } bg-transparent focus:outline-none placeholder-neutral-60`}
             disabled={disabled}
           />
         </div>
