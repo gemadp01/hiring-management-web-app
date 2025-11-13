@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Project Overview
 
-Currently, two official plugins are available:
+Hiring Management Web App is a web-based application designed to help companies manage the recruitment process efficiently — from creating job openings, receiving candidate applications, to tracking the recruitment status of each position.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application is built with modern technologies using React, TypeScript, and Supabase as a backend-as-a-service, making it easier to handle authentication, data storage, and real-time integrations.
 
-## React Compiler
+## Built with
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React Typescript Vite
+- React Router V7 (Declarative mode)
+- Supabase (BaaS)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Run Locally
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Clone the project
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+  git clone https://github.com/gemadp01/hiring-management-web-app.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Go to the project directory
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+  cd hiring-management-web-app
 ```
+
+Copy .env from .env.example
+
+```bash
+  cp .env.example .env
+```
+
+Set your .env variable to this value (only for testing purposes).
+
+```bash
+  VITE_SUPABASE_URL=https://pafgnmvcempydorraqri.supabase.co
+  VITE_SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhZmdubXZjZW1weWRvcnJhcXJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI5MDYyNjIsImV4cCI6MjA3ODQ4MjI2Mn0.B_-BuceLGA2IyeBIcaffb4GjFRXrNg0zHlIO_QZbNF4
+```
+
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the client
+```bash
+  npm run dev
+```
+
+
+
+## Here to Contribute ✨
+
+Contributions are always welcome!  
+
+
+## Authors
+
+- [@gemadp01](https://www.github.com/gemadp01)
+
