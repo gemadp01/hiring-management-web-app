@@ -1,3 +1,5 @@
+import { Button } from "@/components/common/Button";
+import { EmptyState } from "@/components/common/EmptyState";
 import AdminLayout from "@/components/common/layout/AdminLayout";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
@@ -171,27 +173,13 @@ const ManageJobPage = () => {
     <AdminLayout
       headTitle={
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setActiveTab("list")}
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              activeTab === "list"
-                ? "bg-white border-2 border-gray-300 text-gray-900"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
-          >
+          <Button variant="neutral" onClick={() => setActiveTab("list")}>
             Job list
-          </button>
+          </Button>
           <ChevronRightIcon className="w-5 h-5 text-gray-400" />
-          <button
-            onClick={() => setActiveTab("manage")}
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              activeTab === "manage"
-                ? "bg-white border-2 border-gray-300 text-gray-900"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
-          >
+          <Button variant="muted" onClick={() => setActiveTab("manage")}>
             Manage Candidate
-          </button>
+          </Button>
         </div>
       }
     >
@@ -201,68 +189,73 @@ const ManageJobPage = () => {
       </h1>
 
       {/* Table Container */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
+      <div className="w-full p-6 bg-neutral-10 overflow-hidden shadow-[0_4px_8px_0_rgba(0,0,0,0.1)] border border-neutral-40 rounded-lg">
+        {/* <div className="overflow-x-auto">
           <table className="w-full">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left p-4 font-semibold text-gray-700 text-sm">
+            <thead className="bg-">
+              <tr className="">
+                <th className="text-left p-4 text-s-bold border-b border-neutral-30 bg-[rgba(252,252,252,1)]">
                   <div className="flex items-center gap-3">
                     <input
                       type="checkbox"
                       checked={selectAll}
                       onChange={handleSelectAll}
-                      className="w-5 h-5 rounded border-2 border-teal-500 text-teal-600 focus:ring-2 focus:ring-teal-500 cursor-pointer"
+                      className="w-5 h-5 rounded cursor-pointer"
                     />
                     <span>NAMA LENGKAP</span>
                   </div>
                 </th>
-                <th className="text-left p-4 font-semibold text-gray-700 text-sm">
+                <th className="text-left p-4 text-s-bold bg-neutral-20">
                   EMAIL ADDRESS
                 </th>
-                <th className="text-left p-4 font-semibold text-gray-700 text-sm">
+                <th className="text-left p-4 text-s-bold bg-neutral-20">
                   PHONE NUMBERS
                 </th>
-                <th className="text-left p-4 font-semibold text-gray-700 text-sm">
+                <th className="text-left p-4 text-s-bold bg-neutral-20">
                   DATE OF BIRTH
                 </th>
-                <th className="text-left p-4 font-semibold text-gray-700 text-sm">
+                <th className="text-left p-4 text-s-bold bg-neutral-20">
                   DOMICILE
                 </th>
-                <th className="text-left p-4 font-semibold text-gray-700 text-sm">
+                <th className="text-left p-4 text-s-bold bg-neutral-20">
                   GENDER
                 </th>
-                <th className="text-left p-4 font-semibold text-gray-700 text-sm">
+                <th className="text-left p-4 text-s-bold bg-neutral-20">
                   LINK LINKEDIN
                 </th>
               </tr>
             </thead>
             <tbody>
               {candidates.map((candidate, index) => (
-                <tr
-                  key={candidate.id}
-                  className={`border-b border-gray-100 hover:bg-gray-50 transition-colors ${
-                    candidate.selected ? "bg-teal-50" : ""
-                  }`}
-                >
+                <tr key={candidate.id}>
                   <td className="p-4">
                     <div className="flex items-center gap-3">
                       <input
                         type="checkbox"
                         checked={candidate.selected}
                         onChange={() => handleSelectCandidate(candidate.id)}
-                        className="w-5 h-5 rounded border-2 border-teal-500 text-teal-600 focus:ring-2 focus:ring-teal-500 cursor-pointer"
+                        className="w-5 h-5 rounded cursor-pointer"
                       />
-                      <span className="text-gray-900 font-medium">
+                      <span className="text-m-regular text-neutral-90">
                         {candidate.name}
                       </span>
                     </div>
                   </td>
-                  <td className="p-4 text-gray-600">{candidate.email}</td>
-                  <td className="p-4 text-gray-600">{candidate.phone}</td>
-                  <td className="p-4 text-gray-600">{candidate.dob}</td>
-                  <td className="p-4 text-gray-600">{candidate.domicile}</td>
-                  <td className="p-4 text-gray-600">{candidate.gender}</td>
+                  <td className="p-4 text-m-regular text-neutral-90">
+                    {candidate.email}
+                  </td>
+                  <td className="p-4 text-m-regular text-neutral-90">
+                    {candidate.phone}
+                  </td>
+                  <td className="p-4 text-m-regular text-neutral-90">
+                    {candidate.dob}
+                  </td>
+                  <td className="p-4 text-m-regular text-neutral-90">
+                    {candidate.domicile}
+                  </td>
+                  <td className="p-4 text-m-regular text-neutral-90">
+                    {candidate.gender}
+                  </td>
                   <td className="p-4">
                     <a
                       href={candidate.linkedin}
@@ -277,7 +270,12 @@ const ManageJobPage = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        </div> */}
+        <EmptyState
+          img="/public/No candidates found State.png"
+          headTitle="No candidates found"
+          desc="Share your job vacancies so that more candidates will apply."
+        />
       </div>
 
       {/* Selected Count */}

@@ -15,7 +15,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useCallback, useEffect, useState } from "react";
-import { set, useForm, type FieldValues } from "react-hook-form";
+import { useForm, type FieldValues } from "react-hook-form";
 import { Link } from "react-router";
 
 // type ProfileForm = {
@@ -56,7 +56,7 @@ const JobListPage = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
+    // reset,
   } = useForm({
     mode: "onSubmit",
     reValidateMode: "onChange",
@@ -132,14 +132,12 @@ const JobListPage = () => {
 
     setIsModalOpen(false);
     setToast(true);
-    reset();
+    // reset();
   };
 
   useEffect(() => {
     fetchJobs();
   }, [toast]);
-
-  console.log(jobs);
 
   return (
     <>

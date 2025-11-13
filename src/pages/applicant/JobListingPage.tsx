@@ -1,4 +1,3 @@
-import { Button } from "@/components/common/Button";
 import { EmptyState } from "@/components/common/EmptyState";
 import ApplicantLayout from "@/components/common/layout/ApplicantLayout";
 import { Tag } from "@/components/common/Tag";
@@ -6,6 +5,7 @@ import { supabase } from "@/supabase-client";
 import type { TJob } from "@/types/jobType";
 import { BanknotesIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const JobListingPage = () => {
   const [jobsData, setJobsData] = useState<TJob[]>([]);
@@ -89,7 +89,16 @@ const JobListingPage = () => {
                       <p className="text-m-regular text-neutral-70">Rakamin</p>
                     </div>
                   </div>
-                  <Button variant="secondary">Apply</Button>
+                  <Link
+                    to={`/applicant/resume/${currentJob.id}`}
+                    state={{
+                      job_id: currentJob.id,
+                      job_title: currentJob.title,
+                    }}
+                    className="px-4 py-1 text-s-bold bg-secondary-main text-neutral-90 flex items-center justify-center rounded-[8px] font-bold shadow-[0_1px_2px_0_rgba(0,0,0,0.12)]"
+                  >
+                    Apply
+                  </Link>
                 </div>
               </div>
 
