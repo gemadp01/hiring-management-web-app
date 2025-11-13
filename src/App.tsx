@@ -5,34 +5,34 @@ import ResumePage from "@/pages/applicant/ResumePage";
 import VerifiedPage from "@/pages/applicant/VerifiedPage";
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
-import { supabase } from "@/supabase-client";
-import { useEffect, useState } from "react";
+// import { supabase } from "@/supabase-client";
+// import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router";
 
 function App() {
-  const [session, setSession] = useState<unknown>(null);
+  // const [session, setSession] = useState<unknown>(null);
 
-  const fetchSession = async () => {
-    const currentSession = await supabase.auth.getSession();
-    const { id, email } = currentSession.data.session?.user ?? {};
+  // const fetchSession = async () => {
+  //   const currentSession = await supabase.auth.getSession();
+  //   const { id, email } = currentSession.data.session?.user ?? {};
 
-    const { data: role, error } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", id);
+  //   const { data: role, error } = await supabase
+  //     .from("profiles")
+  //     .select("role")
+  //     .eq("id", id);
 
-    localStorage.setItem("current-user", JSON.stringify({ id, email, role }));
+  //   localStorage.setItem("current-user", JSON.stringify({ id, email, role }));
 
-    if (error) {
-      console.log("Error fetching session:", error);
-    }
+  //   if (error) {
+  //     console.log("Error fetching session:", error);
+  //   }
 
-    setSession(currentSession.data);
-  };
+  //   setSession(currentSession.data);
+  // };
 
-  useEffect(() => {
-    fetchSession();
-  }, []);
+  // useEffect(() => {
+  //   fetchSession();
+  // }, []);
 
   return (
     <>
