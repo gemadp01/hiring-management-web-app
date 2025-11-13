@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 type TInputLayout = {
   label?: string;
@@ -10,6 +10,7 @@ type TInputLayout = {
   helperIconSupport?: string;
   errorMessage?: string;
   disabled?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 } & React.ComponentPropsWithoutRef<"input">;
 
 const InputLayout = ({
@@ -22,6 +23,7 @@ const InputLayout = ({
   // helperIconSupport,
   errorMessage,
   disabled = false,
+  onChange,
 }: TInputLayout) => {
   // const [isFocused, setIsFocused] = useState(false);
 
@@ -53,6 +55,7 @@ const InputLayout = ({
             // className={`w-full py-2 bg-transparent focus:outline-none placeholder-neutral-60 ${
             //   disabled && "cursor-not-allowed"
             // }`}
+            onChange={onChange}
             className={`w-full py-2 ${
               inputIconSupport ? "px-2" : "px-4"
             } bg-transparent focus:outline-none placeholder-neutral-60`}

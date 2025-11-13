@@ -1,12 +1,14 @@
-type TProfileRequirement = {
-  profilRequirements: Record<string, string>;
-  handleRequirementChange: (field: string, value: string) => void;
+const profilRequirements: Record<string, string> = {
+  fullName: "mandatory",
+  photoProfile: "mandatory",
+  gender: "mandatory",
+  domicile: "mandatory",
+  email: "mandatory",
+  phoneNumber: "mandatory",
+  linkedinLink: "mandatory",
+  dateOfBirth: "mandatory",
 };
-
-export const ProfileRequirement = ({
-  profilRequirements,
-  handleRequirementChange,
-}: TProfileRequirement) => {
+export const ProfileRequirement = () => {
   return (
     <>
       {Object.entries(profilRequirements).map(([key, value]) => {
@@ -30,8 +32,9 @@ export const ProfileRequirement = ({
               {labels[key]}
             </span>
             <div className="flex gap-2">
-              <button
-                onClick={() => handleRequirementChange(key, "mandatory")}
+              <input
+                type="radio"
+                value=""
                 className={`px-4 py-1 rounded-full text-sm font-medium transition-all ${
                   value === "mandatory"
                     ? "bg-teal-500 text-white border-2 border-teal-500"
@@ -39,9 +42,8 @@ export const ProfileRequirement = ({
                 }`}
               >
                 Mandatory
-              </button>
-              <button
-                onClick={() => handleRequirementChange(key, "optional")}
+              </input>
+              <input
                 className={`px-4 py-1 rounded-full text-sm font-medium transition-all ${
                   value === "optional"
                     ? "bg-gray-300 text-gray-700 border-2 border-gray-300"
@@ -49,9 +51,8 @@ export const ProfileRequirement = ({
                 }`}
               >
                 Optional
-              </button>
-              <button
-                onClick={() => handleRequirementChange(key, "off")}
+              </input>
+              <input
                 className={`px-4 py-1 rounded-full text-sm font-medium transition-all ${
                   value === "off"
                     ? "bg-gray-300 text-gray-700 border-2 border-gray-300"
@@ -59,7 +60,7 @@ export const ProfileRequirement = ({
                 }`}
               >
                 Off
-              </button>
+              </input>
             </div>
           </div>
         );

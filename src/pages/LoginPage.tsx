@@ -1,9 +1,30 @@
 import { Button } from "@/components/common/Button";
-import InputLayout from "@/components/common/form/InputLayout";
 import AuthPageLayout from "@/components/common/layout/AuthPageLayout";
+import { supabase } from "@/supabase-client";
+import { useForm, type FieldValues } from "react-hook-form";
 import { Link } from "react-router";
 
 const LoginPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm();
+
+  const handleLogin = async (data: FieldValues) => {
+    // console.log(data);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (error) {
+      console.log("Error signing up: ", error);
+      return;
+    }
+  };
+
   return (
     <AuthPageLayout
       headTitle="Masuk ke Rakamin"
@@ -40,16 +61,78 @@ const LoginPage = () => {
         </Button>
       }
     >
-      <form action="" className="w-full">
-        <InputLayout label="Alamat email" type="email" />
-        <InputLayout label="Kata sandi" type="password" />
+      <form onSubmit={handleSubmit(handleLogin)} className="w-full">
+        <div className="mb-4">
+          <label className="block mb-2 text-s-regular text-neutral-90">
+            Email
+            <span className="text-danger-main">*</span>
+          </label>
+
+          <div className="relative flex items-center mb-2 border-2 border-neutral-40 rounded-lg bg-neutral-10">
+            <input
+              type="text"
+              {...register("email")}
+              placeholder="xxx@gmail.com"
+              className="w-full py-2 px-4
+                      bg-transparent focus:outline-none placeholder-neutral-60"
+            />
+          </div>
+
+          {/* Helper Message and Counter */}
+          {/* {errors.title && (
+                    <div
+                      className={`flex items-center justify-between mt-2 text-s-regular ${
+                        errors.title ? "text-danger-main" : "text-neutral-70"
+                      }`}
+                    >
+                      <span className="flex items-center">
+                        {errors.title.message}
+                      </span>
+                    </div>
+                  )} */}
+        </div>
+        <div className="mb-4">
+          <label className="block mb-2 text-s-regular text-neutral-90">
+            Password
+            <span className="text-danger-main">*</span>
+          </label>
+
+          <div className="relative flex items-center mb-2 border-2 border-neutral-40 rounded-lg bg-neutral-10">
+            <input
+              type="password"
+              {...register("password")}
+              placeholder="xxx"
+              className="w-full py-2 px-4
+                      bg-transparent focus:outline-none placeholder-neutral-60"
+            />
+          </div>
+
+          {/* Helper Message and Counter */}
+          {/* {errors.title && (
+                    <div
+                      className={`flex items-center justify-between mt-2 text-s-regular ${
+                        errors.title ? "text-danger-main" : "text-neutral-70"
+                      }`}
+                    >
+                      <span className="flex items-center">
+                        {errors.title.message}
+                      </span>
+                    </div>
+                  )} */}
+        </div>
         <div className="mb-4 text-right">
           <Link to="/forgot-password" className="text-primary-main">
             Lupa kata sandi?
           </Link>
         </div>
         <div>
-          <Button variant="secondary" size="lg" width="full">
+          <Button
+            variant="secondary"
+            size="lg"
+            width="full"
+            className="cursor-pointer"
+            disabled={isSubmitting}
+          >
             Masuk
           </Button>
         </div>

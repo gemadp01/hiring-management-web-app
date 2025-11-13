@@ -17,7 +17,7 @@ type Candidate = {
 };
 
 const ManageJobPage = () => {
-  const [candidates, setCandidates] = useState<Candidate[]>([
+  const [candidates] = useState<Candidate[]>([
     {
       id: 1,
       name: "Aurelie Yukiko",
@@ -152,20 +152,20 @@ const ManageJobPage = () => {
     },
   ]);
 
-  const [selectAll, setSelectAll] = useState(false);
-  const [activeTab, setActiveTab] = useState("manage");
+  // const [selectAll, setSelectAll] = useState(false);
+  // const [activeTab, setActiveTab] = useState("manage");
 
-  const handleSelectAll = () => {
-    const newSelectAll = !selectAll;
-    setSelectAll(newSelectAll);
-    setCandidates(candidates.map((c) => ({ ...c, selected: newSelectAll })));
-  };
+  // const handleSelectAll = () => {
+  //   const newSelectAll = !selectAll;
+  //   setSelectAll(newSelectAll);
+  //   setCandidates(candidates.map((c) => ({ ...c, selected: newSelectAll })));
+  // };
 
-  const handleSelectCandidate = (id: number) => {
-    setCandidates(
-      candidates.map((c) => (c.id === id ? { ...c, selected: !c.selected } : c))
-    );
-  };
+  // const handleSelectCandidate = (id: number) => {
+  //   setCandidates(
+  //     candidates.map((c) => (c.id === id ? { ...c, selected: !c.selected } : c))
+  //   );
+  // };
 
   const selectedCount = candidates.filter((c) => c.selected).length;
 
@@ -173,13 +173,9 @@ const ManageJobPage = () => {
     <AdminLayout
       headTitle={
         <div className="flex items-center gap-3">
-          <Button variant="neutral" onClick={() => setActiveTab("list")}>
-            Job list
-          </Button>
+          <Button variant="neutral">Job list</Button>
           <ChevronRightIcon className="w-5 h-5 text-gray-400" />
-          <Button variant="muted" onClick={() => setActiveTab("manage")}>
-            Manage Candidate
-          </Button>
+          <Button variant="muted">Manage Candidate</Button>
         </div>
       }
     >

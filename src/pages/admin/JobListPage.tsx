@@ -55,7 +55,7 @@ const JobListPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
     // reset,
   } = useForm({
     mode: "onSubmit",
