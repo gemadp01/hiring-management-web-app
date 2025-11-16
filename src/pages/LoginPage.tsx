@@ -1,29 +1,79 @@
+import { Alert } from "@/components/common/Alert";
 import { Button } from "@/components/common/Button";
 import AuthPageLayout from "@/components/common/layout/AuthPageLayout";
+import { loginSchema, type TLoginSchema } from "@/schema/authSchema";
+import { userLogin, type TUser } from "@/store/features/user/userSlice";
+import { useAppDispatch } from "@/store/hooks";
 import { supabase } from "@/supabase-client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 import { useForm, type FieldValues } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [status, setStatus] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
-  } = useForm();
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm<TLoginSchema>({
+    resolver: zodResolver(loginSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
+
+  const email = watch("email");
+  const password = watch("password");
 
   const handleLogin = async (data: FieldValues) => {
     // console.log(data);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email: data.email,
-      password: data.password,
-    });
+    try {
+      const { error, data: loginResult } =
+        await supabase.auth.signInWithPassword({
+          email: data.email,
+          password: data.password,
+        });
 
-    if (error) {
-      console.log("Error signing up: ", error);
-      return;
+      const { data: user } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", loginResult?.user?.id)
+        .single();
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      const userData = {
+        id: user?.id,
+        email: loginResult?.user.email,
+        role: user?.role,
+        token_expires: loginResult?.session.expires_at,
+      } as TUser;
+
+      localStorage.setItem("current-user", JSON.stringify(userData));
+
+      dispatch(userLogin(userData));
+
+      if (user?.role === "admin") {
+        navigate("/admin/job-list");
+      } else {
+        navigate("/applicant/job-listing");
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        setStatus(err.message);
+      }
     }
   };
+
+  useEffect(() => {
+    setStatus(null);
+  }, [email, password]);
 
   return (
     <AuthPageLayout
@@ -61,6 +111,7 @@ const LoginPage = () => {
         </Button>
       }
     >
+      {status && <Alert variant="danger" message={status} />}
       <form onSubmit={handleSubmit(handleLogin)} className="w-full">
         <div className="mb-4">
           <label className="block mb-2 text-s-regular text-neutral-90">
@@ -79,17 +130,15 @@ const LoginPage = () => {
           </div>
 
           {/* Helper Message and Counter */}
-          {/* {errors.title && (
-                    <div
-                      className={`flex items-center justify-between mt-2 text-s-regular ${
-                        errors.title ? "text-danger-main" : "text-neutral-70"
-                      }`}
-                    >
-                      <span className="flex items-center">
-                        {errors.title.message}
-                      </span>
-                    </div>
-                  )} */}
+          {errors.email && (
+            <div
+              className={`flex items-center justify-between mt-2 text-s-regular ${
+                errors.email ? "text-danger-main" : "text-neutral-70"
+              }`}
+            >
+              <span className="flex items-center">{errors.email.message}</span>
+            </div>
+          )}
         </div>
         <div className="mb-4">
           <label className="block mb-2 text-s-regular text-neutral-90">
@@ -127,13 +176,11 @@ const LoginPage = () => {
         </div>
         <div>
           <Button
-            variant="secondary"
+            variant={isSubmitting ? "muted" : "primary"}
             size="lg"
             width="full"
-            className="cursor-pointer"
-            disabled={isSubmitting}
           >
-            Masuk
+            {isSubmitting ? "Loading..." : "Masuk"}
           </Button>
         </div>
       </form>

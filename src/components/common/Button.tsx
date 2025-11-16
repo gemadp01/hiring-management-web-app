@@ -15,13 +15,14 @@ type TButtonProps = {
 } & React.ComponentPropsWithoutRef<"button">;
 
 const button = cva(
-  "flex items-center justify-center rounded-[8px] font-bold shadow-[0_1px_2px_0_rgba(0,0,0,0.12)]",
+  "flex items-center justify-center rounded-[8px] font-bold shadow-[0_1px_2px_0_rgba(0,0,0,0.12)] ",
   {
     variants: {
       variant: {
-        primary: "bg-primary-main text-neutral-10",
-        secondary: "bg-secondary-main text-neutral-90",
-        neutral: "bg-neutral-10 text-neutral-100 border border-neutral-40",
+        primary: "bg-primary-main text-neutral-10 cursor-pointer",
+        secondary: "bg-secondary-main text-neutral-90 cursor-pointer",
+        neutral:
+          "bg-neutral-10 text-neutral-100 border border-neutral-40 cursor-pointer",
         muted:
           "bg-neutral-30 text-neutral-60 border border-neutral-40 cursor-not-allowed",
       },
