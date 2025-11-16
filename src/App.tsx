@@ -1,3 +1,4 @@
+import { useHydration } from "@/hooks/useHydration";
 import JobListPage from "@/pages/admin/JobListPage";
 import ManageJobPage from "@/pages/admin/ManageJobPage";
 import JobListingPage from "@/pages/applicant/JobListingPage";
@@ -33,6 +34,10 @@ function App() {
   // useEffect(() => {
   //   fetchSession();
   // }, []);
+
+  const isHydrated = useHydration();
+
+  if (!isHydrated) return <div>Loading...</div>;
 
   return (
     <>
