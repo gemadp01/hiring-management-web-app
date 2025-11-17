@@ -8,7 +8,8 @@ type TGuestPage = {
 export const GuestPage = ({ children }: TGuestPage) => {
   const userSelector = useAppSelector((state) => state.user);
 
-  if (userSelector.id) {
+  if (userSelector?.token_expires) {
+    console.log("true");
     if (userSelector.role === "admin") {
       return <Navigate to="/admin/job-list" />;
     }
