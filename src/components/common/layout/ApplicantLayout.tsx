@@ -1,11 +1,25 @@
+import { UserDropdown } from "@/components/common/UserDropdown";
 import { ApplicantPage } from "@/components/guard/ApplicantPage";
-import { UserIcon } from "@heroicons/react/16/solid";
+import { userLogout } from "@/store/features/user/userSlice";
+import { useAppDispatch } from "@/store/hooks";
+import { supabase } from "@/supabase-client";
+import { Link, useNavigate } from "react-router";
 
 type TApplicantLayout = {
   children: React.ReactNode;
 };
 
 const ApplicantLayout = ({ children }: TApplicantLayout) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleLogOut = async () => {
+    localStorage.removeItem("current-user");
+    await supabase.auth.signOut();
+    dispatch(userLogout());
+    navigate("/login");
+  };
+
   return (
     <ApplicantPage>
       <div className="min-h-screen">
@@ -13,9 +27,14 @@ const ApplicantLayout = ({ children }: TApplicantLayout) => {
         <header className="bg-neutral-10 border-b border-neutral-10 shadow-[0_1px_2px_0_rgba(0,0,0,0.12)] px-6 py-4">
           <div className="max-w-7xl mx-auto flex justify-end">
             {/* <div className="text-2xl font-bold text-teal-600">JobPortal</div> */}
-            <button className="w-7 h-7 rounded-full flex items-center justify-center border border-neutral-40">
-              <UserIcon className="w-5 h-5 text-neutral-90" />
-            </button>
+            <UserDropdown onLogout={handleLogOut}>
+              <Link
+                to="/applicant/job-listing"
+                className="text-l-bold cursor-pointer hover:opacity-80"
+              >
+                Job List
+              </Link>
+            </UserDropdown>
           </div>
         </header>
 

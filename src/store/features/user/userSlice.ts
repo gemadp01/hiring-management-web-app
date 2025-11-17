@@ -25,10 +25,10 @@ const userSlice = createSlice({
       state.token_expires = action.payload.token_expires;
     },
     userLogout(state) {
-      state.id = "";
-      state.email = "";
-      state.role = "";
-      state.token_expires = 0;
+      state.id = INITIAL_STATE.id;
+      state.email = INITIAL_STATE.email;
+      state.role = INITIAL_STATE.role;
+      state.token_expires = INITIAL_STATE.token_expires;
     },
   },
 });

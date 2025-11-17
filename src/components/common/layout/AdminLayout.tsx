@@ -1,5 +1,7 @@
 import { UserDropdown } from "@/components/common/UserDropdown";
 import { AdminPage } from "@/components/guard/AdminPage";
+import { userLogout } from "@/store/features/user/userSlice";
+import { useAppDispatch } from "@/store/hooks";
 import { supabase } from "@/supabase-client";
 import { Link, useNavigate } from "react-router";
 
@@ -10,10 +12,12 @@ type TAdminLayoutProps = {
 
 function AdminLayout({ headTitle, children }: TAdminLayoutProps) {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleLogOut = async () => {
     localStorage.removeItem("current-user");
     await supabase.auth.signOut();
+    dispatch(userLogout());
     navigate("/login");
   };
 
