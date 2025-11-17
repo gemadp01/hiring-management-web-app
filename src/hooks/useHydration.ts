@@ -1,4 +1,4 @@
-import type { TUser } from "@/store/features/user/userSlice";
+import { userLogin, type TUser } from "@/store/features/user/userSlice";
 import { useAppDispatch } from "@/store/hooks";
 import { useEffect, useState } from "react";
 
@@ -14,15 +14,7 @@ export const useHydration = () => {
 
       if (!currentUser) return;
 
-      dispatch({
-        type: "USER_LOGIN",
-        payload: {
-          id: currentUser.id,
-          email: currentUser.email,
-          role: currentUser.role,
-          token_expires: currentUser.token_expires,
-        },
-      });
+      dispatch(userLogin(currentUser));
     } catch (err) {
       console.log(err);
     } finally {
